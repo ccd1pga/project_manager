@@ -1,0 +1,107 @@
+# Task Management App
+
+## Modules
+import os
+import json
+import hashlib
+
+## Functions
+
+### User Authentication
+function register_user(username, password):
+    if username exists in users:
+        return "User already exists"
+    else:
+        hash password
+        save username and hashed password
+        return "Registration successful"
+
+function login_user(username, password):
+    if username not in users:
+        return "User does not exist"
+    else:
+        hash input password
+        if hashed password matches saved password:
+            return "Login successful"
+        else:
+            return "Incorrect password"
+
+### Task Management
+function add_task(user, task_description):
+    create task with description and incomplete status
+    save task to user's task list
+
+function view_tasks(user):
+    display user's task list
+
+function edit_task(user, task_id, new_description):
+    update task description in user's task list
+
+function delete_task(user, task_id):
+    remove task from user's task list
+
+function mark_task_complete(user, task_id):
+    update task status to complete
+
+### Data Persistence
+function save_data():
+    save users and tasks to file
+
+function load_data():
+    load users and tasks from file
+
+### Data Analysis
+function analyze_tasks(user):
+    calculate and display number of completed tasks
+    calculate and display number of incomplete tasks
+    plot tasks created over time
+
+## Main Program
+load_data()
+display welcome message
+
+while True:
+    display menu options (register, login, exit)
+    get user choice
+    
+    if user chooses register:
+        prompt for username and password
+        call register_user()
+        display result
+
+    if user chooses login:
+        prompt for username and password
+        call login_user()
+        if login successful:
+            while True:
+                display task menu options (add, view, edit, delete, mark complete, analyze, logout)
+                get user choice
+                
+                if user chooses add:
+                    prompt for task description
+                    call add_task()
+
+                if user chooses view:
+                    call view_tasks()
+
+                if user chooses edit:
+                    prompt for task ID and new description
+                    call edit_task()
+
+                if user chooses delete:
+                    prompt for task ID
+                    call delete_task()
+
+                if user chooses mark complete:
+                    prompt for task ID
+                    call mark_task_complete()
+
+                if user chooses analyze:
+                    call analyze_tasks()
+
+                if user chooses logout:
+                    break
+
+    if user chooses exit:
+        save_data()
+        break
