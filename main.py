@@ -1,60 +1,34 @@
 import tkinter as tk
 from tkinter import messagebox
-import project_menu
-import task_menu
-import user_login import User
-import hashlib
-import json
+import services.project_managment as pm
 
-def save_data(data, filename):
-    with open(filename, 'w') as file:
-        json.dump(data, file)
-    print(f"Data saved to {filename}")
+def main_menu(root, user, users):
+    for widget in root.winfo_children():
+        widget.destroy()
 
-def load_data(filename):
-    try:
-        with open(filename, 'r') as file:
-            data = file.read()
-            if not data.strip():
-                return {}
-            return json.loads(data)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return {}
+    tk.Label(root, text=f"Welcome {user['first_name']}!", font=("Helvetica", 16)).pack(pady=20)
+    tk.Button(root, text="User Menu", command=lambda: show_menu(root)).pack(pady=10)
+    tk.Button(root, text="Project Menu", command=lambda: pm.add_project(root, user, users)).pack(pady=10)
+    tk.Button(root, text="Logout", command=lambda: show_login(root)).pack(pady=10)
+
+def show_menu(root):
+    # Placeholder for user menu functionality
+    messagebox.showinfo("Info", "User menu not implemented yet!")
+
+def show_login(root):
+    # Placeholder for login functionality
+    messagebox.showinfo("Info", "Login not implemented yet!")
 
 def main():
-    user_data = load_data('task_manager.json')
-    print("User data loaded successfully")
+    root = tk.Tk()
+    root.title("Project Management System")
     
-    projects_data = load_data('projects.json')
-    print("Projects data loaded successfully")
+    user = {'first_name': 'John'}
+    users = []
 
-    tasks_data = load_data('tasks.json')
-    print("Tasks data loaded successfully")
+    main_menu(root, user, users)
     
-    logged_in_user = None
-
-    while True:
-        choice = input("Choose an option: 1. User Login 2. Project Menu 3. Task Menu 4. Exit\n")
-        if choice == '1':
-            logged_in_user = user_login.login(user_data)
-        elif choice == '2':
-            if logged_in_user:
-                project_menu.manage_projects(logged_in_user, projects_data)
-            else:
-                print("Please log in first.")
-        elif choice == '3':
-            if logged_in_user:
-                task_menu.manage_tasks(logged_in_user, tasks_data)
-            else:
-                print("Please log in first.")
-        elif choice == '4':
-            save_data(user_data, 'task_manager.json')
-            save_data(projects_data, 'projects.json')
-            save_data(tasks_data, 'tasks.json')
-            print("Data saved. Exiting...")
-            break
-        else:
-            print("Invalid choice. Please try again.")
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
