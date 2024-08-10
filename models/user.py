@@ -1,5 +1,6 @@
 import hashlib
 import random
+import json
 
 class User:
     existing_numbers = set()
@@ -55,3 +56,25 @@ class User:
             id=data.get('id'),
             open_projects=data.get('open_projects', 'Open Projects') == 'Open Projects'
         )
+
+def load_users_from_file(filename='data/user.json'):
+    users = []  # Initialize users as an empty list
+    try:
+        with open(filename, 'r') as file:
+            user_data = json.load(file)
+            users = [User.from_dict(data) for data in user_data]
+        print("Users loaded from file.")
+    except FileNotFoundError:
+        print("No saved users found.")
+    except json.JSONDecodeError:
+        print("Error decoding user file.")
+    except Exception as e:
+        print(f"An error occurred while loading users from file: {e}")
+    return users  # Ensure this always returns a list, even if empty
+
+def save_user_to_file(users, filename='data/user.json'):
+    with open(filename, 'w') as file:
+        users_data = [user.to_dict() for user in users]
+        json.dump(users_data, file)
+
+
