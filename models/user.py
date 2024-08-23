@@ -1,6 +1,5 @@
 import hashlib
 import random
-import json
 
 class User:
     existing_numbers = set()
@@ -17,14 +16,17 @@ class User:
     def hash_password(password):
         return hashlib.sha256(password.encode()).hexdigest()
 
-    def __init__(self, first_name, second_name, user_name, email, phone_number, password, id=None, open_projects=True):
+    def __init__(self, first_name, second_name, user_name, email, phone_number, password=None, password_hash=None, id=None, open_projects=True):
         self.id = id if id is not None else User.generate_unique_number()
         self.first_name = first_name
         self.second_name = second_name
         self.user_name = user_name
         self.email = email
         self.phone_number = phone_number
-        self.password_hash = User.hash_password(password)
+        if password_hash is not None:
+            self.password_hash = password_hash
+        else:
+            self.password_hash = User.hash_password(password)
         self.open_projects = 'Open Projects' if open_projects else 'No Projects'
 
     def __repr__(self):
@@ -52,29 +54,7 @@ class User:
             user_name=data['user_name'],
             email=data['email'],
             phone_number=data['phone_number'],
-            password=data['password'],  # Assumes password is provided raw, not hashed
+            password_hash=data['password_hash'],  # used stored password hash
             id=data.get('id'),
             open_projects=data.get('open_projects', 'Open Projects') == 'Open Projects'
         )
-
-def load_users_from_file(filename='data/user.json'):
-    users = []  # Initialize users as an empty list
-    try:
-        with open(filename, 'r') as file:
-            user_data = json.load(file)
-            users = [User.from_dict(data) for data in user_data]
-        print("Users loaded from file.")
-    except FileNotFoundError:
-        print("No saved users found.")
-    except json.JSONDecodeError:
-        print("Error decoding user file.")
-    except Exception as e:
-        print(f"An error occurred while loading users from file: {e}")
-    return users  # Ensure this always returns a list, even if empty
-
-def save_user_to_file(users, filename='data/user.json'):
-    with open(filename, 'w') as file:
-        users_data = [user.to_dict() for user in users]
-        json.dump(users_data, file)
-
-
