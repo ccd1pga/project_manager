@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from file_io import load_users_from_file
+from utils.file_io import load_users_from_file
 
 
 def show_menu(root):

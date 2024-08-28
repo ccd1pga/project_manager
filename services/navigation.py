@@ -2,9 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 from models.user import User  # Ensure this is correct
 from tkinter import messagebox
-import project_managment as pm
+import project_management as pm
 import user_management as um
-import task_managment as tm
+import task_management as tm
 
 # These are the functions that move you around the program
 def main_menu(root, user, users):

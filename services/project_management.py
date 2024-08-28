@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from models.project import Project
-from file_io import load_projects_from_file, save_projects_to_file
+from utils.file_io import load_projects_from_file, save_projects_to_file
 from services.navigation import main_menu
 
 projects = load_projects_from_file() 

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from models.user import User
-from file_io import save_user_to_file
+from utils.file_io import save_user_to_file
 from services.navigation import main_menu
 
 def add_user(root, user, users):

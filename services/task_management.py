@@ -2,7 +2,7 @@ from services.navigation import main_menu
 from models.task import Task
 import tkinter as tk
 from tkinter import messagebox
-from file_io import load_tasks_from_file, save_tasks_to_file
+from utils.file_io import load_tasks_from_file, save_tasks_to_file
 
 tasks = load_tasks_from_file()
 
