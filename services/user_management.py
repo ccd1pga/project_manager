@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 from models.user import User
 from utils.file_io import save_user_to_file
-from services.navigation import main_menu
+from utils.menu import main_menu
 
+# Use the relative path to import the necessary modules
 def add_user(root, user, users):
     for widget in root.winfo_children():
         widget.destroy()
@@ -66,7 +67,7 @@ def add_user(root, user, users):
         tk.Button(root, text="Register", command=save_user).pack(pady=20) 
 
         tk.Button(root, text="Back", command=lambda: main_menu(root, user, users)).pack(pady=10)
-        pass
+        
 
 def first_user(root,users):
     for widget in root.winfo_children():

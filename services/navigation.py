@@ -1,26 +1,18 @@
 import tkinter as tk
 from tkinter import messagebox
 from models.user import User  # Ensure this is correct
-from tkinter import messagebox
-import project_management as pm
-import user_management as um
-import task_management as tm
+import services.project_management as pm
+import services.user_management as um
+import services.task_management as tm
+from utils.menu import main_menu
 
 # These are the functions that move you around the program
-def main_menu(root, user, users):
-    for widget in root.winfo_children():
-        widget.destroy()
-
-    tk.Label(root, text=f"Welcome {user.first_name}!", font=("Helvetica", 16)).pack(pady=20)
-    tk.Button(root, text="User Menu", command=lambda: user_menu(root, users)).pack(pady=10)
-    tk.Button(root, text="Project Menu", command=lambda: pm.add_project(root, user, users)).pack(pady=10)
-    tk.Button(root, text="Logout", command=root.destroy).pack(pady=10)
 
 def user_menu(root, user, users):
     for widget in root.winfo_children():
         widget.destroy()
 
-    tk.Label(root, text="User menu", font=("Helventica", 16)).pack(pady=20)
+    tk.Label(root, text="User menu", font=("Helvetica", 16)).pack(pady=20)
     tk.Button(root, text="Add project", command=lambda: pm.add_project(root, user, users)).pack(pady=10)
     tk.Button(root, text="Assign task", command=lambda: tm.add_task(root, user, users)).pack(pady=10)
     tk.Button(root, text="Main menu", command=lambda: main_menu(root, user, users)).pack(pady=10)

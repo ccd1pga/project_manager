@@ -1,15 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
 from utils.file_io import load_users_from_file
-
+from services.user_management import first_user
+from services.navigation import show_login
 
 def show_menu(root):
     # Placeholder for user menu functionality
     messagebox.showinfo("Info", "User menu not implemented yet!")
 
 def main():
-    from services.user_management import first_user
-    from services.navigation import show_login
     root = tk.Tk()
     root.title("Project Management System")
     

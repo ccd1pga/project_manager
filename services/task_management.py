@@ -1,4 +1,4 @@
-from services.navigation import main_menu
+from utils.menu import main_menu
 from models.task import Task
 import tkinter as tk
 from tkinter import messagebox

@@ -17,7 +17,7 @@ class Project:
         self.description = description
         self.due_date = due_date
         self.priority = priority
-        self.status = 'uncomplete' if status else 'complete'
+        self.status = 'Incomplete' if status else 'complete'
         self.tasks = []
 
     def __repr__(self):
