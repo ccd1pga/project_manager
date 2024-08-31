@@ -51,9 +51,9 @@ def save_tasks_to_file(tasks, filename='data/tasks.json'):
         print(f"An error has occurred whilst saving the task: {e}")
 
 # The load and save functions formally in project.py
-def save_projects_to_file(filename='data/projects.json'):
+def save_projects_to_file(projects, filename='data/project.json'):
     try:
-        with open(projects, filename, 'w') as f:
+        with open(filename, 'w') as f:
             json.dump([project.to_dict() for project in projects], f, indent=4)
             print("Projects have been saved.")
     except Exception as e:
@@ -63,9 +63,9 @@ def load_projects_from_file(filename='data/projects.json'):
     try:
         with open(filename, 'r') as file:
             projects_data = json.load(file)
-            global projects
             projects = [Project.from_dict(data) for data in projects_data]
         print("Projects loaded from file.")
+        return projects
     except FileNotFoundError:
         print("No saved projects found.")
     except json.JSONDecodeError:
